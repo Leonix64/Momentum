@@ -1,0 +1,70 @@
+<ion-content [fullscreen]="true" class="auth-page">
+  <div class="background-container">
+    <div class="gradient-circle top-right"></div>
+    <div class="gradient-circle bottom-left"></div>
+  </div>
+
+  <div class="auth-container">
+    <ion-card class="auth-card">
+      <ion-card-header>
+        <img src="https://w.wallhaven.cc/full/13/wallhaven-1376y1.jpg" class="logo" alt="Logo">
+        <ion-card-title class="ion-text-center">
+          {{ isRegister ? 'Crea tu cuenta' : 'Bienvenido de vuelta' }}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <form>
+          <ion-item lines="none" class="custom-input">
+            <ion-icon slot="start" name="mail-outline" role="img"></ion-icon>
+            <ion-input type="email" placeholder="Correo electronico" clearOnEdit="false"></ion-input>
+          </ion-item>
+
+          <ion-item lines="none" class="custom-input">
+            <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+            <ion-input [type]="passwordType" placeholder="Contraseña"></ion-input>
+            <ion-button fill="clear" slot="end" (click)="togglePasword()">
+              <ion-icon [name]="passwordType === 'password' ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
+            </ion-button>
+          </ion-item>
+
+          <!-- Solo registro -->
+
+          <ion-item lines="none" class="custom-input" *ngIf="isRegister">
+            <ion-icon slot="start" name="person-outline"></ion-icon>
+            <ion-input type="text" placeholder="Nombre completo"></ion-input>
+          </ion-item>
+
+          <ion-button expand="block" shape="round" class="main-button">
+            {{ isRegister ? 'Registrarse' : 'Iniciar sesión' }}
+          </ion-button>
+        </form>
+
+        <div class="auth-footer">
+          <p>
+            {{ isRegister ? 'Ya tienes cuenta?' : '¿No tienes cuenta?' }}
+            <a (click)="toggleAuthMode()" class="auth-toggle">
+              {{ isRegister ? 'Iniciar sesión' : 'Registrate' }}
+            </a>
+          </p>
+
+          <div class="separator">
+            <span>o continua con</span>
+          </div>
+
+          <div class="social-buttons">
+            <ion-button fill="clear" class="social-button">
+              <ion-icon name="logo-google"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" class="social-button">
+              <ion-icon name="logo-facebook"></ion-icon>
+            </ion-button>
+            <ion-button fill="clear" class="social-button">
+              <ion-icon name="logo-apple"></ion-icon>
+            </ion-button>
+          </div>
+        </div>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>
