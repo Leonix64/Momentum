@@ -14,37 +14,70 @@
       </ion-card-header>
 
       <ion-card-content>
-        <form>
+        <!-- Formulario Reactivo (se agregará en el TS después) -->
+        <form [formGroup]="authForm" (ngSubmit)="onSubmit()">
+          <!-- Email (común para login y register) -->
           <ion-item lines="none" class="custom-input">
-            <ion-icon slot="start" name="mail-outline" role="img"></ion-icon>
-            <ion-input type="email" placeholder="Correo electronico" clearOnEdit="false"></ion-input>
+            <ion-icon slot="start" name="mail-outline"></ion-icon>
+            <ion-input 
+              type="email" 
+              placeholder="Correo electrónico" 
+              formControlName="email"
+              required>
+            </ion-input>
           </ion-item>
 
+          <!-- Password (común para login y register) -->
           <ion-item lines="none" class="custom-input">
             <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
-            <ion-input [type]="passwordType" placeholder="Contraseña"></ion-input>
-            <ion-button fill="clear" slot="end" (click)="togglePasword()">
+            <ion-input 
+              [type]="passwordType" 
+              placeholder="Contraseña (mínimo 6 caracteres)" 
+              formControlName="password"
+              minlength="6"
+              required>
+            </ion-input>
+            <ion-button fill="clear" slot="end" (click)="togglePassword()">
               <ion-icon [name]="passwordType === 'password' ? 'eye-off-outline' : 'eye-outline'"></ion-icon>
             </ion-button>
           </ion-item>
 
-          <!-- Solo registro -->
-
+          <!-- Nombre (solo para register) -->
           <ion-item lines="none" class="custom-input" *ngIf="isRegister">
             <ion-icon slot="start" name="person-outline"></ion-icon>
-            <ion-input type="text" placeholder="Nombre completo"></ion-input>
+            <ion-input 
+              type="text" 
+              placeholder="Nombre completo"
+              formControlName="name"
+              required>
+            </ion-input>
           </ion-item>
 
-          <ion-button expand="block" shape="round" class="main-button">
+          <!-- Teléfono (opcional solo para register) -->
+          <ion-item lines="none" class="custom-input" *ngIf="isRegister">
+            <ion-icon slot="start" name="call-outline"></ion-icon>
+            <ion-input 
+              type="tel" 
+              placeholder="Teléfono (opcional)"
+              formControlName="phoneNumber">
+            </ion-input>
+          </ion-item>
+
+          <ion-button 
+            expand="block" 
+            shape="round" 
+            class="main-button"
+            type="submit"
+            [disabled]="!authForm.valid || isLoading">
             {{ isRegister ? 'Registrarse' : 'Iniciar sesión' }}
           </ion-button>
         </form>
 
         <div class="auth-footer">
           <p>
-            {{ isRegister ? 'Ya tienes cuenta?' : '¿No tienes cuenta?' }}
+            {{ isRegister ? '¿Ya tienes cuenta?' : '¿No tienes cuenta?' }}
             <a (click)="toggleAuthMode()" class="auth-toggle">
-              {{ isRegister ? 'Iniciar sesión' : 'Registrate' }}
+              {{ isRegister ? 'Iniciar sesión' : 'Regístrate' }}
             </a>
           </p>
 
