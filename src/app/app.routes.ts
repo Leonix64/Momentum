@@ -14,5 +14,18 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   { path: 'login', component: LoginComponent },
-  { path: 'settings', component: SettingsPage, canActivate: [authGuard] },
+  {
+    path: 'settings', component: SettingsPage, canActivate: [authGuard],
+    children: [
+      { path: 'account', loadComponent: () => import('./settings/components/account-settings/account-settings.component').then(m => m.AccountSettingsComponent) },
+      { path: 'appearance', loadComponent: () => import('./settings/components/appearance-settings/appearance-settings.component').then(m => m.AppearanceSettingsComponent) },
+      { path: 'help', loadComponent: () => import('./settings/components/help-support/help-support.component').then(m => m.HelpSupportComponent) },
+      { path: 'security', loadComponent: () => import('./settings/components/security-settings/security-settings.component').then(m => m.SecuritySettingsComponent) },
+      /*{
+        path: '',
+        redirectTo: '/settings/account',
+        pathMatch: 'full'
+      }*/
+    ]
+  },
 ];

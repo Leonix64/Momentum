@@ -1,13 +1,80 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>settings</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="settings-page">
+  <div class="background-container">
+    <div class="gradient-circle top-right"></div>
+    <div class="gradient-circle bottom-left"></div>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">settings</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div class="settings-container">
+    <div class="settings-header">
+      <ion-avatar>
+        <img [src]="user.avatar" alt="User Avatar">
+      </ion-avatar>
+      <h1>{{ user.name }}</h1>
+      <p>{{ user.email }}</p>
+    </div>
+
+    <div class="settings-section">
+      <h3>Configuracion de Cuenta</h3>
+      <div class="settings-grid">
+        <ion-card class="settings-card" button [routerLink]="['/settings', 'account']">
+          <ion-icon name="person-outline"></ion-icon>
+          <h2>Cuenta</h2>
+          <p>Actualiza tu informacion personal y preferencias</p>
+          <ion-button fill="clear">Administrar</ion-button>
+        </ion-card>
+
+        <ion-card class="settings-card" button [routerLink]="['/settings', 'security']">
+          <ion-icon name="lock-closed-outline"></ion-icon>
+          <h2>Seguridad</h2>
+          <p>Contraseña, verificacion en dos pasos y actividad</p>
+          <ion-button fill="clear">Proteger</ion-button>
+        </ion-card>
+
+        <ion-card class="settings-card" button [routerLink]="['/settings', 'notifications']">
+          <ion-icon name="notifications-outline"></ion-icon>
+          <h2>Notificaciones</h2>
+          <p>Controla que notificaciones recibes</p>
+          <ion-button fill="clear">Configurar</ion-button>
+        </ion-card>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h3>Personalizacion</h3>
+      <div class="settings-grid">
+        <ion-card class="settings-card" button [routerLink]="['/settings', 'appearance']">
+          <ion-icon name="color-palette-outline"></ion-icon>
+          <h2>Apariencia</h2>
+          <p>Tema, colores y modo oscuro</p>
+          <ion-button fill="clear">Personalizar</ion-button>
+        </ion-card>
+
+        <ion-card class="settings-card" button [routerLink]="['/settings', 'privacy']">
+          <ion-icon name="shield-checkmark-outline"></ion-icon>
+          <h2>Privacidad</h2>
+          <p>Controla tu informacion y visibilidad</p>
+          <ion-button fill="clear">Proteger</ion-button>
+        </ion-card>
+      </div>
+    </div>
+
+    <div class="settings-section">
+      <h3>Ayuda y Soporte</h3>
+      <div class="settings-grid">
+        <ion-card class="settings-card" button [routerLink]="['/settings', 'help']">
+          <ion-icon name="help-circle-outline"></ion-icon>
+          <h2>Ayuda</h2>
+          <p>Preguntas frecuentes y guia de usuario</p>
+          <ion-button fill="clear">Consultar</ion-button>
+        </ion-card>
+
+        <ion-card class="settings-card" button [routerLink]="['/settings', 'about']">
+          <ion-icon name="information-circle-outline"></ion-icon>
+          <h2>Acerca de</h2>
+          <p>Información de la aplicación y versión</p>
+          <ion-button fill="clear">Ver detalles</ion-button>
+        </ion-card>
+      </div>
+    </div>
+  </div>
 </ion-content>

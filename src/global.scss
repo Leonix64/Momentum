@@ -35,3 +35,196 @@
 /* @import "@ionic/angular/css/palettes/dark.always.css"; */
 /* @import "@ionic/angular/css/palettes/dark.class.css"; */
 @import '@ionic/angular/css/palettes/dark.system.css';
+
+:root {
+  /* Colores base */
+  --ion-background-color: #121212;
+  --ion-toolbar-background: rgba(18, 18, 18, 0.9);
+  --ion-text-color: #ffffff;
+  --ion-border-color: rgba(255, 255, 255, 0.1);
+  
+  /* Efecto glassmorphism */
+  --glass-background: rgba(255, 255, 255, 0.05);
+  --glass-border: 1px solid rgba(255, 255, 255, 0.1);
+  --glass-blur: blur(10px);
+  --glass-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  
+  /* Bordes redondeados */
+  --border-radius-medium: 12px;
+  --border-radius-large: 16px;
+  
+  /* Transiciones */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+}
+
+/* Estructura base */
+ion-content {
+  --background: var(--ion-background-color);
+  color: var(--ion-text-color);
+}
+
+/* Efecto glass card (reutilizable) */
+.glass-card {
+  background: var(--glass-background);
+  backdrop-filter: var(--glass-blur);
+  border: var(--glass-border);
+  border-radius: var(--border-radius-large);
+  box-shadow: var(--glass-shadow);
+  transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(var(--ion-color-primary-rgb), 0.3);
+  }
+}
+
+/* Gradientes decorativos (como en tu login) */
+.background-container {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: 0;
+
+  .gradient-circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+
+    &.top-right {
+      width: 300px;
+      height: 300px;
+      top: -100px;
+      right: -100px;
+      background: linear-gradient(135deg, var(--ion-color-primary), #ff00aa);
+    }
+
+    &.bottom-left {
+      width: 400px;
+      height: 400px;
+      bottom: -150px;
+      left: -150px;
+      background: linear-gradient(45deg, var(--ion-color-secondary), #00aaff);
+    }
+  }
+}
+
+/* Toolbar personalizado */
+ion-toolbar {
+  --background: var(--ion-toolbar-background);
+  --color: white;
+  --border-width: 0;
+  backdrop-filter: var(--glass-blur);
+  
+  ion-title {
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+}
+
+/* Botones principales */
+ion-button {
+  --border-radius: var(--border-radius-medium);
+  --padding-top: 14px;
+  --padding-bottom: 14px;
+  --padding-start: 24px;
+  --padding-end: 24px;
+  letter-spacing: 0.5px;
+  font-weight: 600;
+  
+  &.button-primary {
+    --background: linear-gradient(90deg, var(--ion-color-primary), var(--ion-color-secondary));
+    --background-activated: linear-gradient(90deg, var(--ion-color-primary-shade), var(--ion-color-secondary-shade));
+    --box-shadow: 0 4px 20px rgba(var(--ion-color-primary-rgb), 0.3);
+    text-transform: uppercase;
+  }
+  
+  &.button-glass {
+    --background: var(--glass-background);
+    --background-activated: rgba(var(--ion-color-primary-rgb), 0.2);
+    --color: var(--ion-color-primary);
+    border: var(--glass-border);
+    backdrop-filter: var(--glass-blur);
+  }
+}
+
+/* Inputs personalizados */
+ion-item {
+  --background: rgba(255, 255, 255, 0.1);
+  --border-radius: var(--border-radius-medium);
+  --padding-start: 16px;
+  --inner-padding-end: 16px;
+  --min-height: 56px;
+  margin-bottom: 16px;
+  border: var(--glass-border);
+  transition: all var(--transition-fast);
+  
+  &:focus-within {
+    border-color: var(--ion-color-primary);
+    box-shadow: 0 0 0 2px rgba(var(--ion-color-primary-rgb), 0.2);
+  }
+  
+  ion-icon {
+    color: var(--ion-color-primary);
+    font-size: 1.2rem;
+  }
+  
+  ion-input, ion-textarea, ion-select {
+    --placeholder-color: rgba(255, 255, 255, 0.6);
+    --color: white;
+  }
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+ion-router-outlet > * {
+  animation: fadeIn 0.5s ease-out;
+}
+
+/* Loading spinner personalizado */
+ion-loading {
+  --background: rgba(18, 18, 18, 0.8);
+  --spinner-color: var(--ion-color-primary);
+
+  .loading-wrapper {
+    @extend .glass-card;
+    padding: 24px;
+  }
+}
+
+/* Adaptación para pantallas pequeñas */
+@media (max-width: 576px) {
+  :root {
+    --border-radius-medium: 10px;
+    --border-radius-large: 14px;
+  }
+  
+  .gradient-circle {
+    &.top-right {
+      width: 200px;
+      height: 200px;
+      top: -80px;
+      right: -80px;
+    }
+    
+    &.bottom-left {
+      width: 250px;
+      height: 250px;
+      bottom: -100px;
+      left: -100px;
+    }
+  }
+}
